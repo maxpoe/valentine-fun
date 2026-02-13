@@ -25,8 +25,13 @@ services:
     image: ghcr.io/maxpoe/valentine-fun:latest
     ports:
       - "8080:80"
+    environment:
+      - VALENTINE_NAME=Partner
     restart: always
 ```
+
+### Dynamic Name Customization
+You can personalize the question by setting the `VALENTINE_NAME` environment variable in your `docker-compose.yml`. If set, the question will become *"Will you be my Valentine, [Name]?"*.
 
 ### Running Locally
 

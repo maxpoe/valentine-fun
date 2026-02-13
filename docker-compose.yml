@@ -3,4 +3,6 @@ services:
     image: ghcr.io/maxpoe/valentine-fun:latest
     ports:
       - "8080:80"
+    environment:
+      - VALENTINE_NAME=Partner
     restart: always

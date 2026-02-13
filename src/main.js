@@ -24,9 +24,10 @@ let noCount = 0
 let yesScale = 1
 
 function render() {
+  const name = window.VALENTINE_NAME && window.VALENTINE_NAME !== "__VALENTINE_NAME__" ? `, ${window.VALENTINE_NAME}` : "";
   app.innerHTML = `
     <div id="main-view">
-      <h1 class="title">Will you be my Valentine?</h1>
+      <h1 class="title">Will you be my Valentine${name}?</h1>
       <div class="cat-container">
         <img src="${noCount === 0 ? '/cat-waiting.png' : '/cat-sad.png'}" alt="Cute Cat" class="cat-image" id="catImage">
       </div>
