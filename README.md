@@ -2,6 +2,7 @@
 
 A simple, delightful, interactive website to ask that special someone to be your Valentine.
 
+![Valentine Overview](public/valentine-overview.png)
 
 ## Tech Stack
 
