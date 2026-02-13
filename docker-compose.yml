@@ -1,8 +1,10 @@
 services:
   valentine-fun:
-    image: ghcr.io/maxpoe/valentine-fun:latest
+    # image: ghcr.io/maxpoe/valentine-fun:latest
+    build: .
     ports:
       - "8080:80"
     environment:
-      - VALENTINE_NAME=Partner
+      - VALENTINE_NAME=Partner # name to be displayed in the question
+      - VALENTINE_PET=dog # cat or dog is supported
     restart: always

@@ -22,14 +22,29 @@ const noPhrases = [
 
 let noCount = 0
 let yesScale = 1
+let currentPet = window.VALENTINE_PET && (window.VALENTINE_PET === "dog" || window.VALENTINE_PET === "cat") ? window.VALENTINE_PET : "cat";
 
 function render() {
   const name = window.VALENTINE_NAME && window.VALENTINE_NAME !== "__VALENTINE_NAME__" ? `, ${window.VALENTINE_NAME}` : "";
+
+  const waitingImg = `/${currentPet}-waiting.png`;
+  const sadImg = `/${currentPet}-sad.png`;
+  const celebratingImg = `/${currentPet}-celebrating.png`;
+
   app.innerHTML = `
     <div id="main-view">
+      <div class="theme-switch-wrapper">
+        <span class="theme-label">Cat Purr-sonality 🐱</span>
+        <label class="switch">
+          <input type="checkbox" id="themeToggle" ${currentPet === 'dog' ? 'checked' : ''}>
+          <span class="slider"></span>
+        </label>
+        <span class="theme-label">Puppy Love 🐶</span>
+      </div>
+
       <h1 class="title">Will you be my Valentine${name}?</h1>
       <div class="cat-container">
-        <img src="${noCount === 0 ? '/cat-waiting.png' : '/cat-sad.png'}" alt="Cute Cat" class="cat-image" id="catImage">
+        <img src="${noCount === 0 ? waitingImg : sadImg}" alt="Cute Pet" class="cat-image" id="catImage">
       </div>
       <div class="buttons">
         <button id="yesBtn" class="btn" style="font-size: ${1.2 + noCount * 1.2}rem; padding: ${1 + noCount * 0.5}rem ${2.5 + noCount * 1.2}rem;">Yes</button>
@@ -40,7 +55,7 @@ function render() {
     <div id="celebration-view" class="celebration">
       <h1 class="title">Yay! Now I am the happiest man on earth! ❤️</h1>
       <div class="cat-container">
-        <img src="/cat-celebrating.png" alt="Happy Cat" class="cat-image">
+        <img src="${celebratingImg}" alt="Happy Pet" class="cat-image">
       </div>
     </div>
   `
@@ -51,6 +66,7 @@ function render() {
 function setupEventListeners() {
   const yesBtn = document.querySelector('#yesBtn')
   const noBtn = document.querySelector('#noBtn')
+  const themeToggle = document.querySelector('#themeToggle')
   const mainView = document.querySelector('#main-view')
   const celebrationView = document.querySelector('#celebration-view')
 
@@ -65,8 +81,13 @@ function setupEventListeners() {
   if (noBtn) {
     noBtn.addEventListener('click', () => {
       noCount++
-      // The user asked for "double in size" each time.
-      yesScale = Math.pow(2, noCount)
+      render()
+    })
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('change', (e) => {
+      currentPet = e.target.checked ? 'dog' : 'cat'
       render()
     })
   }
